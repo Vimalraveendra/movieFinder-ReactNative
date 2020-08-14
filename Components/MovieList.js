@@ -1,15 +1,31 @@
 import React from 'react';
-import {View, StyleSheet, Text, ScrollView} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  ScrollView,
+  Image,
+  TouchableHighlight,
+} from 'react-native';
 
-const MovieList = ({moviesList}) => {
+const MovieList = ({moviesList, openPopUpWindow}) => {
   return (
     <View style={styles.movies}>
       <ScrollView>
         {moviesList.length > 0 &&
           moviesList.map((movie) => (
-            <View key={movie.imdbID} style={styles.movie}>
-              <Text style={styles.heading}>{movie.Title}</Text>
-            </View>
+            <TouchableHighlight
+              key={movie.imdbID}
+              onPress={() => openPopUpWindow(movie.imdbID)}>
+              <View style={styles.movie}>
+                <Image
+                  source={{uri: movie.Poster}}
+                  style={styles.image}
+                  resizeMode="cover"
+                />
+                <Text style={styles.heading}>{movie.Title}</Text>
+              </View>
+            </TouchableHighlight>
           ))}
       </ScrollView>
     </View>
@@ -32,6 +48,10 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     padding: 20,
     backgroundColor: '#445565',
+  },
+  image: {
+    width: '100%',
+    height: 300,
   },
 });
 

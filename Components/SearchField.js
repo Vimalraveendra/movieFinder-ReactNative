@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, StyleSheet, TextInput} from 'react-native';
 
 const SearchField = ({searchMovies, text, onChange}) => {
