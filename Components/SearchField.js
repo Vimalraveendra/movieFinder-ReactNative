@@ -1,17 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, TextInput} from 'react-native';
 
-const SearchField = () => {
-  const onChangeText = (text) => {
-    console.log(text);
-  };
-
+const SearchField = ({searchMovies, text, onChange}) => {
   return (
     <View style={styles.inputField}>
       <TextInput
         placeholder="Enter a movie..."
         style={styles.inputText}
-        onChangeText={onChangeText}
+        // eslint-disable-next-line no-shadow
+        onChangeText={(text) => onChange(text)}
+        value={text}
+        onSubmitEditing={searchMovies}
       />
     </View>
   );
@@ -23,6 +22,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 18,
     borderRadius: 10,
+    marginBottom: 10,
   },
   inputText: {
     fontSize: 20,
