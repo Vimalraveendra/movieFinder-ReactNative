@@ -27,7 +27,10 @@ const App = () => {
       });
     });
   };
-  console.log('mivess', state.moviesList);
+
+  const openPopUpWindow = () => {
+    console.log('hello');
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Movie Finder</Text>
@@ -36,7 +39,10 @@ const App = () => {
         searchMovies={searchMovies}
         onChange={onChange}
       />
-      <MovieList moviesList={state.moviesList} />
+      <MovieList
+        moviesList={state.moviesList}
+        openPopUpWindow={openPopUpWindow}
+      />
     </View>
   );
 };
