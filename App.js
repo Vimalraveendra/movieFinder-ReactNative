@@ -5,6 +5,7 @@ import axios from 'axios';
 import Config from 'react-native-config';
 import SearchField from './Components/SearchField';
 import MovieList from './Components/MovieList';
+import PopUpWindow from './Components/PopUpWindow';
 
 const App = () => {
   const apiUrl = `http://www.omdbapi.com/?&apikey=${Config.API_KEY}`;
@@ -12,6 +13,7 @@ const App = () => {
   const [state, setState] = useState({
     text: '',
     moviesList: [],
+    selected: {},
   });
 
   const onChange = (inputText) => {
@@ -28,8 +30,13 @@ const App = () => {
     });
   };
 
-  const openPopUpWindow = () => {
-    console.log('hello');
+  const openPopUpWindow = (id) => {
+    axios(apiUrl + '&i=' + id).then(({data}) => {
+      let response = data;
+      setState((prevState) => {
+        return {...prevState, selected: response};
+      });
+    });
   };
   return (
     <View style={styles.container}>
@@ -43,6 +50,7 @@ const App = () => {
         moviesList={state.moviesList}
         openPopUpWindow={openPopUpWindow}
       />
+      <PopUpWindow selected={state.selected} />
     </View>
   );
 };
